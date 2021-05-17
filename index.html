@@ -4,28 +4,34 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta property="og:image" content="screen.jpg" />
   <title>Music Player</title>
+  <!-- 아이콘 라이브러리 -->
   <script src="https://unpkg.com/feather-icons"></script>
   <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-  <section class="player-container">
-    <figure>
-      <h4>Song Name</h4>
-      <p>Lorem ipsum dolor sit amet.</p>
-    </figure>
-    <div class="btn-group">
-      <button id="prev"><i data-feather="chevron-left"></i></button>
-      <button id="play"><i data-feather="play"></i></button>
-      <button id="next"><i data-feather="chevron-right"></i></button>
-    </div>
-    <div class="progress">
-      <div class="inner-bar"></div>
-    </div>
-  </section>
+  <main>
+    <h1>Music Player</h1>
+    <section class="player-container">
+      <figure class="cover">
+        <audio id="audio" src="./music/Funny Dream.mp3"></audio>
+      </figure>
+      <h4 id="title">Song Name</h4>
+      <div class="btn-group">
+        <button id="prev"><i data-feather="chevron-left"></i></button>
+        <button id="play"><i data-feather="play"></i></button>
+        <button id="next"><i data-feather="chevron-right"></i></button>
+      </div>
+      <div class="progress-container">
+        <div class="progress"></div>
+      </div>
+    </section>
+  </main>
 
   <script>
     feather.replace()
   </script>
+  <script src="./js/app.js"></script>
 </body>
 </html>
