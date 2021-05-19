@@ -9,9 +9,13 @@ const progressContainer = document.querySelector('.progress-container');
 const progress = document.querySelector('.progress');
 
 // Song Data
-const songs = ['Funny Dream', 'Inspirational', 'That Positive Feeling by Alumo'];
+const songs = [
+  'FunnyDream', 
+  'Inspirational', 
+  'ThatPositiveFeeling'
+];
 
-let songIndex = 1;
+let songIndex = 0;
 
 function loadSong(song) {
   title.innerText = song;
@@ -21,13 +25,54 @@ function loadSong(song) {
 
 loadSong(songs[songIndex]);
 
+function playSong() {
+  audio.classList.add('play');
+  audio.play();
+
+  // 아이콘 변경
+  playBtn.querySelector('img').setAttribute('src', './images/play.svg');
+  playBtn.querySelector('img').setAttribute('alt', 'play');
+
+  // Play Cover Animation
+  cover.classList.add('play')
+}
+
+function pauseSong() {
+  audio.pause()
+  audio.classList.remove('play');
+  playBtn.querySelector('img').setAttribute('src', './images/pause.svg');
+  playBtn.querySelector('img').setAttribute('alt', 'pause');
+
+  // Puase Cover Animation
+  cover.classList.remove('play');
+}
+
 // 버튼 이벤트 
 playBtn.addEventListener('click', () => {
   if(audio.classList.contains('play')){
-    audio.pause()
-    audio.classList.remove('play');
+    pauseSong();
   } else {
     audio.classList.add('play');
-    audio.play();
+    playSong();
   }
+})
+
+// next
+nextBtn.addEventListener('click', () => {
+  if(songIndex < songs.length - 1) {
+    songIndex++;
+  } 
+
+  loadSong(songs[songIndex]);
+  playSong();
+})
+
+// prev 
+prevBtn.addEventListener('click', () => {
+  if(songIndex > 0) {
+    songIndex--;
+  } 
+
+  loadSong(songs[songIndex]);
+  playSong();
 })
