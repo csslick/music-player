@@ -1,6 +1,7 @@
 # Music Player
 - CSS UI Design
 - Javascript  
+- Demo: https://csslick.github.io/music-player/
 
 ## Feature
 - play & pause
