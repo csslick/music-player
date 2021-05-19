@@ -47,6 +47,9 @@ function pauseSong() {
   cover.classList.remove('play');
 }
 
+
+
+
 // 버튼 이벤트 
 playBtn.addEventListener('click', () => {
   if(audio.classList.contains('play')){
@@ -75,4 +78,16 @@ prevBtn.addEventListener('click', () => {
 
   loadSong(songs[songIndex]);
   playSong();
+})
+
+// check song progress(playing event update)
+audio.addEventListener('timeupdate', function(e){
+  const {duration, currentTime} = e.target;
+  console.log(duration, currentTime);
+  const progressPercent = (currentTime / duration) * 100;
+  console.log(parseInt(progressPercent) + '%');
+  progress.style.width = progressPercent + '%';
+  if(parseInt(progressPercent) === 100) {
+    progress.style.width = '0%';
+  }
 })
