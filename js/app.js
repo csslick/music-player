@@ -47,8 +47,16 @@ function pauseSong() {
   cover.classList.remove('play');
 }
 
+function nextSong() {
+  if(songIndex < songs.length - 1) {
+    songIndex++;
+  } else {
+    songIndex = 0;
+  }
 
-
+  loadSong(songs[songIndex]);
+  playSong();
+}
 
 // 버튼 이벤트 
 playBtn.addEventListener('click', () => {
@@ -62,12 +70,7 @@ playBtn.addEventListener('click', () => {
 
 // next
 nextBtn.addEventListener('click', () => {
-  if(songIndex < songs.length - 1) {
-    songIndex++;
-  } 
-
-  loadSong(songs[songIndex]);
-  playSong();
+  nextSong()
 })
 
 // prev 
@@ -80,7 +83,7 @@ prevBtn.addEventListener('click', () => {
   playSong();
 })
 
-// check song progress(playing event update)
+// 재생 위치 표시 check song progress(playing event update)
 audio.addEventListener('timeupdate', function(e){
   const {duration, currentTime} = e.target;
   console.log(duration, currentTime);
@@ -90,4 +93,20 @@ audio.addEventListener('timeupdate', function(e){
   if(parseInt(progressPercent) === 100) {
     progress.style.width = '0%';
   }
+})
+
+// set progress 재생 위치 변경
+progressContainer.addEventListener('click', function(e){
+  const width = this.clientWidth
+  const clickX = e.offsetX
+  const duration = audio.duration
+
+  // 클릭 재생 위치 계산
+  audio.currentTime = (clickX / width) * duration;
+})
+
+// End music
+audio.addEventListener('ended', function(){
+  console.log('ended')
+  nextSong()
 })
